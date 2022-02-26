@@ -4,8 +4,8 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "node server",
-    "devStart": "nodemon server"
+    "start": "node server.js",
+    "devStart": "nodemon server.js"
   },
   "keywords": [],
   "author": "Ammar Hanif",
