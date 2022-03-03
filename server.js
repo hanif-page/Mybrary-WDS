@@ -11,6 +11,7 @@ const bodyParser = require("body-parser")
 // Import Router as middleware function
 const indexRouter = require("./routes/index")
 const authorRouter = require("./routes/authors")
+const bookRouter = require("./routes/books")
 
 // default setting
 app.set('view engine', 'ejs')
@@ -30,6 +31,7 @@ db.once('open', () => console.log("connected to mongoose"))
 // use the Route from the imported middleware function
 app.use('/', indexRouter)
 app.use("/authors", authorRouter)
+app.use("/books", bookRouter)
 
 // Handling non matching request from the client
 app.use((req, res, next) => {
@@ -37,4 +39,4 @@ app.use((req, res, next) => {
 })
 
 const port = process.env.PORT || 3000 
-app.listen(port, () => console.log(`server running on port ${port}`))
+app.listen(port, () => console.log(`server running on port ${port}\nhttp://localhost:${port}`))
