@@ -1,6 +1,7 @@
 const express = require("express")
 const router = express.Router()
 const Author = require("../models/author")
+const Book = require("../models/book")
 
 // All Authors Route
 router.get('/', async (req, res) => {
@@ -39,9 +40,7 @@ router.post('/', async (req, res) => {
     // NOTE : all mongodb and mongoose action are asynchrounous, so it's a good thing to use async await and try catch method.
     try {
         const newAuthor = await author.save()
-        // res.redirect(`authors/${newAuthor.id}`)
-        
-        res.redirect(`authors`) // render from 'views' as root folder 
+        res.redirect(`authors/${newAuthor.id}`) // render from 'views' as root folder 
     } catch(err) {
         // render from 'views' as root folder
         res.render('authors/new', {
@@ -50,6 +49,75 @@ router.post('/', async (req, res) => {
         })
     }
 
+})
+
+router.get("/:id", async (req, res) => {
+
+    try {   
+        const author = await Author.findById(req.params.id)
+        const books = await Book.find({ author: author.id }).limit(6).exec()
+
+        res.render(`authors/show`, { author: author, booksByAuthor: books })
+    } catch {
+        res.redirect("/")
+    }
+
+})
+
+// the edit page
+router.get("/:id/edit", async (req, res) => {
+    try {
+        const author = await Author.findById(req.params.id)
+
+        // render from 'views' as root folder
+        res.render("authors/edit", { author: author })
+    } catch(err) {
+        res.redirect("/authors")
+    }   
+    
+})
+
+// the action of edit page 
+router.put("/:id", async (req, res) => {
+    // res.send(`Update Author ${req.params.id}`)
+
+    let author; 
+    // NOTE : all mongodb and mongoose action are asynchrounous, so it's a good thing to use async await and try catch method.
+    try {
+        author = await Author.findById(req.params.id)
+        author.name = req.body.name // change the "name" data
+        await author.save()
+        res.redirect(`/authors/${author.id}`) // render from 'views' as root folder         
+    } catch(err) {
+        if(author == null) {
+            res.redirect("/") 
+        } else {
+            // render from 'views' as root folder
+            res.render('authors/new', {
+                author: author,
+                errMsg: `Error updating author`
+            })
+        }
+    }
+})
+
+router.delete("/:id", async (req, res) => {
+    // res.send(`Delete Author ${req.params.id}`)
+
+    let author; 
+    // NOTE : all mongodb and mongoose action are asynchrounous, so it's a good thing to use async await and try catch method.
+    try {
+        author = await Author.findById(req.params.id)
+        await author.remove()
+        res.redirect(`/authors`) // render from 'views' as root folder         
+    } catch(err) {
+        if(author == null) {
+            res.redirect("/") 
+        } else {
+            // render from 'views' as root folder
+            res.redirect(`/authors/${author.id}`)
+        }
+    }
 })
  
 module.exports = router
