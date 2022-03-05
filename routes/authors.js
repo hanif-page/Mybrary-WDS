@@ -34,7 +34,8 @@ router.get("/new", (req, res) => {
 // Create Authors Route
 router.post('/', async (req, res) => {
     const author = new Author({
-        name: req.body.name 
+        name: req.body.name,
+        bookCount: 0 
     })
 
     // NOTE : all mongodb and mongoose action are asynchrounous, so it's a good thing to use async await and try catch method.
@@ -79,7 +80,6 @@ router.get("/:id/edit", async (req, res) => {
 
 // the action of edit page 
 router.put("/:id", async (req, res) => {
-    // res.send(`Update Author ${req.params.id}`)
 
     let author; 
     // NOTE : all mongodb and mongoose action are asynchrounous, so it's a good thing to use async await and try catch method.
@@ -102,7 +102,6 @@ router.put("/:id", async (req, res) => {
 })
 
 router.delete("/:id", async (req, res) => {
-    // res.send(`Delete Author ${req.params.id}`)
 
     let author; 
     // NOTE : all mongodb and mongoose action are asynchrounous, so it's a good thing to use async await and try catch method.
