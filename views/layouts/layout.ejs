@@ -12,23 +12,25 @@
     href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css"
     rel="stylesheet"
     />
+
+    <link rel="stylesheet" href="/stylesheets/main.css">
+
     <!-- Load FilePond library -->
-    <!-- <script defer src="https://unpkg.com/filepond/dist/filepond.js"></script>
+    <script defer src="https://unpkg.com/filepond/dist/filepond.js"></script>
     <script defer src="https://unpkg.com/filepond-plugin-file-encode/dist/filepond-plugin-file-encode.js"></script>
     <script defer src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
     <script defer src="https://unpkg.com/filepond-plugin-image-resize/dist/filepond-plugin-image-resize.js"></script>
-    <script defer src="/javascripts/fileUpload.js"></script> -->
+    <script defer src="/javascripts/fileUpload.js"></script>
 </head>
 <body>
-    <%- include("../partials/header.ejs") %> 
-    <%- include("../partials/errorMessage.ejs") %> 
-    <%- body %> 
 
-    <!-- Load FilePond library -->
-    <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
-    <script src="https://unpkg.com/filepond-plugin-file-encode/dist/filepond-plugin-file-encode.js"></script>
-    <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
-    <script src="https://unpkg.com/filepond-plugin-image-resize/dist/filepond-plugin-image-resize.js"></script>
-    <script src="/javascripts/fileUpload.js"></script>
+    <div class="container">
+        <%- include("../partials/header.ejs") %> 
+        
+        <div class="inner-container">
+            <%- include("../partials/errorMessage.ejs") %> 
+            <%- body %> 
+        </div>
+    </div>
 </body>
 </html>
