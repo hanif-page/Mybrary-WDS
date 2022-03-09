@@ -4,7 +4,7 @@
     <div class="form-row">
         <div class="form-item">
             <label for="name">Name</label>
-            <input type="text" name="name" value="<%= searchOptions.name %> ">
+            <input type="text" name="name" value="<%= searchOptions.name %> "> 
         </div>
     </div>
     <div class="form-row form-row-end">
@@ -14,8 +14,8 @@
 <br>
 <% authors.forEach(author => { %>
 
-    <div class="form-row form-row-between">
-        <div> <%= author.name %>  </div>
+    <div class="author-row">
+        <div class="author-name"> <%= author.name %>  </div>
         <div class="btn-row">
             <a class="btn btn-primary" href="/authors/<%= author.id %> ">View</a>
             <a class="btn btn-primary" href="/authors/<%= author.id %>/edit ">Edit</a>
